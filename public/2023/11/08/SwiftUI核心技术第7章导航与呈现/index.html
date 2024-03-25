@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="林克">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第7章：导航与呈现 1. NavigationView和NavigationViewLink 在SwiftUI中，NavigationView和NavigationLink组合起来使用，提供了一个强大的导航框架，让我们可以构建具有层次结构的页面间跳转。它们的设计遵循了SwiftUI的声明式语法，使得页面跳转和数据传递变得直观和易于管理。 NavigationView NavigationView是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI核心技术第7章导航与呈现">
+<meta property="og:url" content="http://xuebusi.gitee.io/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC7%E7%AB%A0%E5%AF%BC%E8%88%AA%E4%B8%8E%E5%91%88%E7%8E%B0/index.html">
+<meta property="og:site_name" content="SwiftUI训练营">
+<meta property="og:description" content="第7章：导航与呈现 1. NavigationView和NavigationViewLink 在SwiftUI中，NavigationView和NavigationLink组合起来使用，提供了一个强大的导航框架，让我们可以构建具有层次结构的页面间跳转。它们的设计遵循了SwiftUI的声明式语法，使得页面跳转和数据传递变得直观和易于管理。 NavigationView NavigationView是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-08T01:09:18.000Z">
+<meta property="article:modified_time" content="2024-03-17T06:11:38.648Z">
+<meta property="article:author" content="林克">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>SwiftUI核心技术第7章导航与呈现 - SwiftUI训练营</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebusi.gitee.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SwiftUI训练营" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SwiftUI训练营</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SwiftUI核心技术第7章导航与呈现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-08 09:09" pubdate>
+          2023年11月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          53 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SwiftUI核心技术第7章导航与呈现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>第7章：导航与呈现</strong></p>
+<p><strong>1. NavigationView和NavigationViewLink</strong></p>
+<p>在SwiftUI中，<code>NavigationView</code>和<code>NavigationLink</code>组合起来使用，提供了一个强大的导航框架，让我们可以构建具有层次结构的页面间跳转。它们的设计遵循了SwiftUI的声明式语法，使得页面跳转和数据传递变得直观和易于管理。</p>
+<p><strong>NavigationView</strong></p>
+<p><code>NavigationView</code>是一个容器视图，它承载着你的视图层次结构，并提供了展示这些视图的空间。你可以把它看作是页面导航的起点。通常，一个<code>NavigationView</code>包含一个或多个<code>View</code>，这些<code>View</code>可以通过<code>NavigationLink</code>来进行跳转。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">NavigationView</span> &#123;<br>    <span class="hljs-type">List</span>(selection: <span class="hljs-variable">$selectedItem</span>) &#123;<br>        <span class="hljs-type">NavigationLink</span>(destination: <span class="hljs-type">DetailView</span>(item: item)) &#123;<br>            <span class="hljs-type">Text</span>(item.title)<br>        &#125;<br>    &#125;<br>    .navigationBarTitle(<span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Items&quot;</span>))<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>NavigationView</code>包含了一个列表，列表中的每一项都绑定了一个<code>NavigationLink</code>，点击时将展示<code>DetailView</code>。</p>
+<p><strong>NavigationLink</strong></p>
+<p><code>NavigationLink</code>负责在<code>NavigationView</code>中触发页面跳转。它有多个初始化方法，可以根据需求选择使用。最基本的用法是提供一个目标视图和触发跳转的内容。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">NavigationLink</span>(destination: <span class="hljs-type">DetailView</span>(item: item)) &#123;<br>    <span class="hljs-type">Text</span>(item.title)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里<code>NavigationLink</code>的目的地是<code>DetailView</code>，用户点击列表项上的<code>Text</code>时会触发导航到<code>DetailView</code>。</p>
+<p><strong>激活和反激活链接</strong></p>
+<p><code>NavigationLink</code>可以与SwiftUI的状态绑定，以编程方式激活或反激活导航。通过在<code>NavigationLink</code>初始化时传递一个布尔型的绑定，你可以控制导航的行为。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isLinkActive <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">NavigationView</span> &#123;<br>        <span class="hljs-type">NavigationLink</span>(destination: <span class="hljs-type">DetailView</span>(), isActive: <span class="hljs-variable">$isLinkActive</span>) &#123;<br>            <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Go to Details&quot;</span>) &#123;<br>                <span class="hljs-keyword">self</span>.isLinkActive <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，一个按钮被用来激活<code>NavigationLink</code>。当用户点击按钮，<code>isLinkActive</code>状态变为<code>true</code>，触发导航到<code>DetailView</code>。</p>
+<p><strong>传递数据</strong></p>
+<p>在导航过程中，你可能需要向目的地视图传递数据。<code>NavigationLink</code>的<code>destination</code>参数让你可以轻松做到这一点。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">NavigationLink</span>(destination: <span class="hljs-type">DetailView</span>(item: item)) &#123;<br>    <span class="hljs-type">ItemRow</span>(item: item)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这里，每个<code>ItemRow</code>是一个列表中的行，它带有一个与之关联的<code>item</code>数据模型。点击<code>ItemRow</code>时，<code>item</code>将被传递到<code>DetailView</code>。</p>
+<p><strong>小结</strong></p>
+<p><code>NavigationView</code>和<code>NavigationLink</code>构成了SwiftUI中页面导航的基石。它们的使用方式灵活而强大，支持各种复杂的导航模式。通过声明式语法，我们可以更专注于视图的内容和业务逻辑，而不是导航的细节。本章节的后续部分将探讨更高级的导航模式，如使用<code>TabView</code>和<code>modal</code>呈现，以及如何处理数据传递和状态管理。</p>
+<p><strong>2. TabView</strong></p>
+<p>在构建一个用户界面时，底部的标签栏是一种常见的设计，允许用户轻松切换不同的视图或功能模块。在SwiftUI中，这可以通过<code>TabView</code>来实现。<code>TabView</code>为应用提供了一个选项卡式的界面，每个选项卡都代表了一个视图。</p>
+<p><strong>基本用法</strong></p>
+<p><code>TabView</code>的基本用法涉及到声明式地列出每一个选项卡，并使用<code>tabItem</code>修饰符来定义每个标签的外观，通常包括图标和文本。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">TabView</span> &#123;<br>    <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;首页&quot;</span>)<br>        .tabItem &#123;<br>            <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;house&quot;</span>)<br>            <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Home&quot;</span>)<br>        &#125;<br>    <br>    <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;设置&quot;</span>)<br>        .tabItem &#123;<br>            <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;gear&quot;</span>)<br>            <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Settings&quot;</span>)<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个简单的例子中，<code>TabView</code>包含了两个选项卡：“首页”和“设置”，每个选项卡都是用<code>Text</code>视图表示的，并且有对应的系统图标。</p>
+<p><strong>选项卡状态管理</strong></p>
+<p><code>TabView</code>可以与<code>@State</code>变量绑定，从而允许你编程方式控制当前激活的选项卡。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> selectedTab <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">TabView</span>(selection: <span class="hljs-variable">$selectedTab</span>) &#123;<br>        <span class="hljs-type">HomeView</span>()<br>            .tabItem &#123;<br>                <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;house&quot;</span>)<br>                <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Home&quot;</span>)<br>            &#125;<br>            .tag(<span class="hljs-number">0</span>)<br>        <br>        <span class="hljs-type">SettingsView</span>()<br>            .tabItem &#123;<br>                <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;gear&quot;</span>)<br>                <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Settings&quot;</span>)<br>            &#125;<br>            .tag(<span class="hljs-number">1</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，<code>selectedTab</code>绑定到<code>TabView</code>的<code>selection</code>参数。通过改变<code>selectedTab</code>的值，你可以改变当前选中的标签页。</p>
+<p><strong>自定义外观</strong></p>
+<p><code>TabView</code>的外观可以通过多种方式进行自定义。例如，可以使用<code>.accentColor</code>来改变选中标签的颜色。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">TabView</span> &#123;<br>    <span class="hljs-comment">// ... 你的选项卡</span><br>&#125;<br>.accentColor(.green)<br></code></pre></td></tr></table></figure>
+
+<p><strong>结合NavigationView使用</strong></p>
+<p>在<code>TabView</code>内部，你可能还会嵌入<code>NavigationView</code>，以在选项卡内部提供导航堆栈。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">TabView</span> &#123;<br>    <span class="hljs-type">NavigationView</span> &#123;<br>        <span class="hljs-type">HomeView</span>()<br>    &#125;<br>    .tabItem &#123;<br>        <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;house&quot;</span>)<br>        <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Home&quot;</span>)<br>    &#125;<br>    <span class="hljs-comment">// ... 其他选项卡</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样做可以确保每个选项卡都能拥有独立的导航历史，这对于用户体验非常重要。</p>
+<p><strong>使用场景</strong></p>
+<p><code>TabView</code>在很多类型的应用中都非常有用。它是构建具有多个独立部分的应用的理想选择，例如社交网络应用、具有个人中心、消息、设置等的应用。</p>
+<p><strong>小结</strong></p>
+<p>通过本节的介绍，我们了解了如何使用<code>TabView</code>创建具有多个交互式选项卡的界面。<code>TabView</code>不仅提供了高度的可定制性，还能够很好地与其他视图和数据流模式协同工作。在接下来的小节中，我们将继续探索更多关于SwiftUI中视图呈现和数据流管理的先进概念。</p>
+<p><strong>3. Sheets和Alerts</strong></p>
+<p>在构建应用时，弹出视图和警告框（Alerts）是与用户交互的重要方式。在SwiftUI中，这通常通过使用<code>Sheet</code>和<code>Alert</code>视图完成。</p>
+<p><strong>Sheets</strong></p>
+<p>Sheet是一种覆盖在当前内容上的卡片样式视图，通常用于导航流程之外的辅助任务，比如表单填写、设置选项等。</p>
+<p><strong>创建Sheet</strong></p>
+<p>要创建一个Sheet，你需要使用<code>.sheet</code>修饰符，并为其提供一个绑定的布尔值，这个布尔值决定Sheet是否可见。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> showingSheet <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Show Sheet&quot;</span>) &#123;<br>        showingSheet.toggle()<br>    &#125;<br>    .sheet(isPresented: <span class="hljs-variable">$showingSheet</span>) &#123;<br>        <span class="hljs-comment">// Sheet的内容</span><br>        <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Here&#x27;s the Sheet&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>自定义Sheet</strong></p>
+<p>Sheet的内容可以是任意视图。例如，你可以创建一个包含表单的<code>NavigationView</code>。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift">.sheet(isPresented: <span class="hljs-variable">$showingSheet</span>) &#123;<br>    <span class="hljs-type">NavigationView</span> &#123;<br>        <span class="hljs-type">Form</span> &#123;<br>            <span class="hljs-comment">// 表单内容</span><br>        &#125;<br>        .navigationBarTitle(<span class="hljs-string">&quot;Settings&quot;</span>, displayMode: .inline)<br>        .navigationBarItems(trailing: <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Done&quot;</span>) &#123;<br>            showingSheet <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br>        &#125;)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>使用Sheet实现细节</strong></p>
+<p>在内部，Sheet会自动管理自己的显示和隐藏。你可以将<code>showingSheet</code>绑定到视图的某个状态或者对象的属性上，当这个属性变化时，对应的Sheet会自动显示或隐藏。</p>
+<p><strong>Alerts</strong></p>
+<p>Alerts用于显示重要信息，并可以提供一个或多个操作选项。</p>
+<p><strong>创建Alert</strong></p>
+<p>和Sheet类似，Alert也使用绑定的布尔值来控制显示状态。不过，创建Alert时，通常还会指定标题、消息和按钮。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> showingAlert <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Show Alert&quot;</span>) &#123;<br>        showingAlert <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>    &#125;<br>    .alert(isPresented: <span class="hljs-variable">$showingAlert</span>) &#123;<br>        <span class="hljs-type">Alert</span>(<br>            title: <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Warning&quot;</span>),<br>            message: <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Are you sure?&quot;</span>),<br>            primaryButton: .destructive(<span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Delete&quot;</span>)) &#123;<br>                <span class="hljs-comment">// 删除操作</span><br>            &#125;,<br>            secondaryButton: .cancel()<br>        )<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Alert的样式</strong></p>
+<p>Alert可以有多种样式，从简单的带有单一按钮的Alert到复杂的带有多个按钮和自定义操作的Alert。</p>
+<p><strong>小结</strong></p>
+<p>Sheet和Alert都是在SwiftUI中管理临时视图和用户交互的重要工具。通过合理使用这两种视图，你可以创建出既直观又有效的用户体验。正如我们所见，SwiftUI提供的<code>.sheet</code>和<code>.alert</code>修饰符让这两种视图的展示和管理变得十分简单。在接下来的章节中，我们将深入探讨如何利用SwiftUI的高级特性来构建更为复杂的用户交互界面。</p>
+<p><strong>4. Navigation的高级用法</strong></p>
+<p>SwiftUI的导航系统提供了一种直观且声明式的方法来处理视图间的转换。除了基础的<code>NavigationView</code>和<code>NavigationLink</code>之外，我们还可以采用更高级的用法来增强用户体验和视图的灵活性。</p>
+<p><strong>程序化导航</strong></p>
+<p>在某些情况下，你可能需要从视图模型或响应某个事件时进行导航。这可以通过绑定到视图模型中的属性并使用<code>NavigationLink</code>的<code>isActive</code>参数实现。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ViewModel</span>: <span class="hljs-title class_">ObservableObject</span> &#123;<br>    <span class="hljs-meta">@Published</span> <span class="hljs-keyword">var</span> isDetailViewActive <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br>&#125;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ContentView</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-meta">@StateObject</span> <span class="hljs-keyword">var</span> viewModel <span class="hljs-operator">=</span> <span class="hljs-type">ViewModel</span>()<br><br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-type">NavigationView</span> &#123;<br>            <span class="hljs-type">NavigationLink</span>(destination: <span class="hljs-type">DetailView</span>(), isActive: <span class="hljs-variable">$viewModel</span>.isDetailViewActive) &#123; <br>                <span class="hljs-type">EmptyView</span>()<br>            &#125;<br>            <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Go to Details&quot;</span>) &#123;<br>                viewModel.isDetailViewActive <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>隐藏和显示导航栏</strong></p>
+<p>在用户界面中，有时候我们需要隐藏导航栏来提供沉浸式体验，或者我们需要在特定的视图中改变导航栏的显示方式。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">DetailView</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-comment">// 隐藏导航栏</span><br>        .navigationBarHidden(<span class="hljs-literal">true</span>)<br>        <span class="hljs-comment">// 在视图即将出现时设置导航栏样式</span><br>        .onAppear &#123;<br>            <span class="hljs-comment">// 设置导航栏样式</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>自定义后退按钮行为</strong></p>
+<p>有时默认的后退按钮行为并不符合我们的需要。在SwiftUI中，我们可以通过添加一个自定义的按钮并绑定其行为来覆盖默认的后退按钮。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CustomBackButtonView</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-meta">@Environment</span>(\.presentationMode) <span class="hljs-keyword">var</span> presentationMode<br><br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-type">Button</span>(action: &#123;<br>            <span class="hljs-comment">// 执行自定义后退操作</span><br>            presentationMode.wrappedValue.dismiss()<br>        &#125;) &#123;<br>            <span class="hljs-type">HStack</span> &#123;<br>                <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;arrow.left&quot;</span>)<br>                <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Back&quot;</span>)<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>深度链接</strong></p>
+<p>深度链接是指直接导航到应用内部的某个特定页面的链接。在SwiftUI中，我们可以监听来自URL的深度链接，并根据链接的内容导航到相应的视图。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs swift">.onOpenURL &#123; url <span class="hljs-keyword">in</span><br>    <span class="hljs-comment">// 解析URL并进行导航</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>嵌套导航</strong></p>
+<p>在构建复杂的界面时，我们可能会需要嵌套多个<code>NavigationView</code>。虽然这在用户界面上并不常见，但在特定的设计中可能是必要的。嵌套导航需要细心处理，以确保导航栈的正确和流畅的用户体验。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">NavigationView</span> &#123;<br>    <span class="hljs-comment">// 主界面</span><br>    <span class="hljs-type">NavigationView</span> &#123;<br>        <span class="hljs-comment">// 嵌套的子界面</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>小结</strong></p>
+<p>通过上述高级导航功能，开发者可以在SwiftUI中创建复杂且具有出色用户体验的导航流。这些高级技巧的掌握可以帮助你更好地管理视图层级和导航逻辑，让应用的导航更加直观和响应用户操作。在后续章节中，我们将探索如何将这些高级导航技巧与应用的其它部分相结合，以构建完整且功能丰富的应用程序。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SwiftUI/" class="category-chain-item">SwiftUI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SwiftUI核心技术第7章导航与呈现</div>
+      <div>http://xuebusi.gitee.io/2023/11/08/SwiftUI核心技术第7章导航与呈现/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>林克</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC8%E7%AB%A0%E5%8A%A8%E7%94%BB%E4%B8%8E%E8%BD%AC%E5%9C%BA/" title="SwiftUI核心技术第8章动画与转场">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SwiftUI核心技术第8章动画与转场</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC6%E7%AB%A0%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E7%BB%91%E5%AE%9A/" title="SwiftUI核心技术第6章数据流与绑定">
+                        <span class="hidden-mobile">SwiftUI核心技术第6章数据流与绑定</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"UeEf1Og9eXqQmt4R5SD6T89a-gzGzoHsz","appKey":"nP5zBQgChvERhwq9Jyo7jFvp","path":"window.location.pathname","placeholder":"请友好评论～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

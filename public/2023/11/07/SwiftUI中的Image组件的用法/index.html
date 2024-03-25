@@ -1,0 +1,696 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="林克">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在 SwiftUI 中，Image 视图用于显示图片。你可以使用多种来源的图片，包括应用的资源包、系统图标库以及从网络获取的图片。下面是一些 Image 组件的基本和进阶用法。 基础用法从 Assets.xcassets 加载图片：1Image(&quot;myImage&quot;) &#x2F;&#x2F; &quot;myImage&quot; 是你的图片在 Assets.xcassets 中的名称  使用系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI中的Image组件的用法">
+<meta property="og:url" content="http://xuebusi.gitee.io/2023/11/07/SwiftUI%E4%B8%AD%E7%9A%84Image%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="SwiftUI训练营">
+<meta property="og:description" content="在 SwiftUI 中，Image 视图用于显示图片。你可以使用多种来源的图片，包括应用的资源包、系统图标库以及从网络获取的图片。下面是一些 Image 组件的基本和进阶用法。 基础用法从 Assets.xcassets 加载图片：1Image(&quot;myImage&quot;) &#x2F;&#x2F; &quot;myImage&quot; 是你的图片在 Assets.xcassets 中的名称  使用系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-07T12:19:55.000Z">
+<meta property="article:modified_time" content="2024-03-17T06:12:34.479Z">
+<meta property="article:author" content="林克">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>SwiftUI中的Image组件的用法 - SwiftUI训练营</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebusi.gitee.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SwiftUI训练营" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SwiftUI训练营</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SwiftUI中的Image组件的用法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-07 20:19" pubdate>
+          2023年11月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SwiftUI中的Image组件的用法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在 SwiftUI 中，<code>Image</code> 视图用于显示图片。你可以使用多种来源的图片，包括应用的资源包、系统图标库以及从网络获取的图片。下面是一些 <code>Image</code> 组件的基本和进阶用法。</p>
+<h3 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h3><h4 id="从-Assets-xcassets-加载图片："><a href="#从-Assets-xcassets-加载图片：" class="headerlink" title="从 Assets.xcassets 加载图片："></a>从 Assets.xcassets 加载图片：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>) <span class="hljs-comment">// &quot;myImage&quot; 是你的图片在 Assets.xcassets 中的名称</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="使用系统图标："><a href="#使用系统图标：" class="headerlink" title="使用系统图标："></a>使用系统图标：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;star.fill&quot;</span>) <span class="hljs-comment">// 使用 SF Symbols 的图标</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="常用修饰符"><a href="#常用修饰符" class="headerlink" title="常用修饰符"></a>常用修饰符</h3><h4 id="重新着色（tinting）："><a href="#重新着色（tinting）：" class="headerlink" title="重新着色（tinting）："></a>重新着色（tinting）：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable() <span class="hljs-comment">// 允许图片被拉伸</span><br>    .renderingMode(.template) <span class="hljs-comment">// 将图片设置为模板模式</span><br>    .foregroundColor(.blue) <span class="hljs-comment">// 改变图片颜色</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="缩放以适应容器大小："><a href="#缩放以适应容器大小：" class="headerlink" title="缩放以适应容器大小："></a>缩放以适应容器大小：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable() <span class="hljs-comment">// 允许图片被拉伸</span><br>    .aspectRatio(contentMode: .fit) <span class="hljs-comment">// 保持图片的宽高比</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="填充整个容器："><a href="#填充整个容器：" class="headerlink" title="填充整个容器："></a>填充整个容器：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable()<br>    .aspectRatio(contentMode: .fill) <span class="hljs-comment">// 图片可能会超出容器大小</span><br>    .clipped() <span class="hljs-comment">// 超出部分将被裁剪</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="调整图片大小："><a href="#调整图片大小：" class="headerlink" title="调整图片大小："></a>调整图片大小：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable()<br>    .frame(width: <span class="hljs-number">100</span>, height: <span class="hljs-number">100</span>) <span class="hljs-comment">// 指定图片的宽和高</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="圆形剪裁："><a href="#圆形剪裁：" class="headerlink" title="圆形剪裁："></a>圆形剪裁：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable()<br>    .scaledToFill()<br>    .frame(width: <span class="hljs-number">100</span>, height: <span class="hljs-number">100</span>)<br>    .clipShape(<span class="hljs-type">Circle</span>()) <span class="hljs-comment">// 将图片剪裁成圆形</span><br>    .overlay(<span class="hljs-type">Circle</span>().stroke(<span class="hljs-type">Color</span>.white, lineWidth: <span class="hljs-number">4</span>)) <span class="hljs-comment">// 圆形边框</span><br>    .shadow(radius: <span class="hljs-number">10</span>) <span class="hljs-comment">// 阴影效果</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><h4 id="图片叠加（Overlay）："><a href="#图片叠加（Overlay）：" class="headerlink" title="图片叠加（Overlay）："></a>图片叠加（Overlay）：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable()<br>    .scaledToFit()<br>    .overlay(<br>        <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Overlay&quot;</span>) <span class="hljs-comment">// 在图片上添加文本覆盖层</span><br>            .font(.caption)<br>            .padding(<span class="hljs-number">5</span>)<br>            .background(<span class="hljs-type">Color</span>.black.opacity(<span class="hljs-number">0.5</span>))<br>            .cornerRadius(<span class="hljs-number">5</span>)<br>            .foregroundColor(.white)<br>            .padding(<span class="hljs-number">10</span>), <span class="hljs-comment">// 文本内边距</span><br>        alignment: .bottomTrailing <span class="hljs-comment">// 对齐到图片的右下角</span><br>    )<br></code></pre></td></tr></table></figure>
+
+<h4 id="图片遮罩（Masking）："><a href="#图片遮罩（Masking）：" class="headerlink" title="图片遮罩（Masking）："></a>图片遮罩（Masking）：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>    .resizable()<br>    .scaledToFit()<br>    .mask(<br>        <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;SwiftUI&quot;</span>) <span class="hljs-comment">// 使用文本作为遮罩</span><br>            .font(.system(size: <span class="hljs-number">72</span>))<br>            .bold()<br>    )<br></code></pre></td></tr></table></figure>
+
+<h4 id="图片动画："><a href="#图片动画：" class="headerlink" title="图片动画："></a>图片动画：</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isRotated <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br>        .resizable()<br>        .rotationEffect(.degrees(isRotated <span class="hljs-operator">?</span> <span class="hljs-number">360</span> : <span class="hljs-number">0</span>)) <span class="hljs-comment">// 旋转动画</span><br>        .animation(.linear(duration: <span class="hljs-number">2</span>), value: isRotated)<br>        .onAppear &#123;<br>            isRotated.toggle()<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用网络图片"><a href="#使用网络图片" class="headerlink" title="使用网络图片"></a>使用网络图片</h3><p>在 SwiftUI 中，没有内置从网络直接加载图片的方法。通常，你需要使用 <code>URLSession</code> 获取图片数据，然后将数据转换为 <code>UIImage</code>（在 iOS 上）或 <code>NSImage</code>（在 macOS 上），最后将其转换为 SwiftUI 可以使用的 <code>Image</code>。或者你可以使用第三方库，如 <code>SDWebImageSwiftUI</code> 来简化网络图片的加载过程。</p>
+<p>在 SwiftUI 2.0 之后的版本，<code>AsyncImage</code> 视图提供了一个原生的异步加载网络图片的方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">AsyncImage</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://example.com/myImage.png&quot;</span>)) &#123; image <span class="hljs-keyword">in</span><br>    image.resizable() <span class="hljs-comment">// 如果成功加载，显示图片</span><br>&#125;<br>placeholder: &#123;<br>    <span class="hljs-type">ProgressView</span>() <span class="hljs-comment">// 在加载期间显示加载指示器</span><br>&#125;<br>.frame(width: <span class="hljs-number">100</span>, height: <span class="hljs-number">100</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>Image</code> 视图在 SwiftUI 中是核心组件之一，它配</p>
+<p>合修饰符和其他视图，能够实现丰富多彩的用户界面元素。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SwiftUI/" class="category-chain-item">SwiftUI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SwiftUI中的Image组件的用法</div>
+      <div>http://xuebusi.gitee.io/2023/11/07/SwiftUI中的Image组件的用法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>林克</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/07/SwiftUI%E4%B8%AD%E7%9A%84%E5%BC%80%E5%85%B3%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%A8%E6%B3%95/" title="SwiftUI中的开关组件的用法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SwiftUI中的开关组件的用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/07/SwiftUI%E4%B8%AD%E7%9A%84%E6%8C%89%E9%92%AE%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%A8%E6%B3%95/" title="SwiftUI中的按钮组件的用法">
+                        <span class="hidden-mobile">SwiftUI中的按钮组件的用法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"UeEf1Og9eXqQmt4R5SD6T89a-gzGzoHsz","appKey":"nP5zBQgChvERhwq9Jyo7jFvp","path":"window.location.pathname","placeholder":"请友好评论～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

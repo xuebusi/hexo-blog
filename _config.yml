@@ -5,7 +5,7 @@ keywords: null
 author: 林克
 language: zh-CN
 timezone: ''
-url: http://xuebusi.gitee.io
+url: http://xuebusi.github.io
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:

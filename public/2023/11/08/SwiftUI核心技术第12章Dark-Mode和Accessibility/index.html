@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="林克">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第12章：Dark Mode和Accessibility 第1小节：支持暗黑模式 随着用户对于在不同光照条件下使用设备的需求增加，暗黑模式（Dark Mode）成为了现代应用设计不可或缺的一部分。它不仅有助于减少在低光环境下使用设备时的眼睛疲劳，还能为电池续航带来好处，特别是在OLED屏幕上。此外，暗黑模式还能为用户提供一个更为集中和减少分心的视觉环境。 理解暗黑模式 色彩转换 - 暗黑模式不仅仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI核心技术第12章Dark Mode和Accessibility">
+<meta property="og:url" content="http://xuebusi.gitee.io/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC12%E7%AB%A0Dark-Mode%E5%92%8CAccessibility/index.html">
+<meta property="og:site_name" content="SwiftUI训练营">
+<meta property="og:description" content="第12章：Dark Mode和Accessibility 第1小节：支持暗黑模式 随着用户对于在不同光照条件下使用设备的需求增加，暗黑模式（Dark Mode）成为了现代应用设计不可或缺的一部分。它不仅有助于减少在低光环境下使用设备时的眼睛疲劳，还能为电池续航带来好处，特别是在OLED屏幕上。此外，暗黑模式还能为用户提供一个更为集中和减少分心的视觉环境。 理解暗黑模式 色彩转换 - 暗黑模式不仅仅">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-08T01:33:25.000Z">
+<meta property="article:modified_time" content="2024-03-17T06:11:54.398Z">
+<meta property="article:author" content="林克">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>SwiftUI核心技术第12章Dark Mode和Accessibility - SwiftUI训练营</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebusi.gitee.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SwiftUI训练营" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SwiftUI训练营</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SwiftUI核心技术第12章Dark Mode和Accessibility"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-08 09:33" pubdate>
+          2023年11月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SwiftUI核心技术第12章Dark Mode和Accessibility</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>第12章：Dark Mode和Accessibility</strong></p>
+<p><strong>第1小节：支持暗黑模式</strong></p>
+<p>随着用户对于在不同光照条件下使用设备的需求增加，暗黑模式（Dark Mode）成为了现代应用设计不可或缺的一部分。它不仅有助于减少在低光环境下使用设备时的眼睛疲劳，还能为电池续航带来好处，特别是在OLED屏幕上。此外，暗黑模式还能为用户提供一个更为集中和减少分心的视觉环境。</p>
+<h3 id="理解暗黑模式"><a href="#理解暗黑模式" class="headerlink" title="理解暗黑模式"></a>理解暗黑模式</h3><ol>
+<li><p><strong>色彩转换</strong> - 暗黑模式不仅仅是将背景设置为黑色和文本设置为白色那么简单。它涉及到色彩配色的整体调整，以确保可读性、可访问性和品牌一致性。</p>
+</li>
+<li><p><strong>图层和深度</strong> - 暗色背景提升了颜色对比，这意味着阴影和高亮可以用来模拟层次感和深度。</p>
+</li>
+<li><p><strong>用户控制</strong> - 用户应当能够选择在明亮或暗黑模式下使用应用，或让应用跟随系统设置自动切换。</p>
+</li>
+</ol>
+<h3 id="设计指南"><a href="#设计指南" class="headerlink" title="设计指南"></a>设计指南</h3><ol>
+<li><p><strong>颜色主题</strong> - 定义一套色彩主题，包括在暗黑模式下使用的色彩。应使用较亮的色调和透明度来增加层次感，同时避免使用纯白色，以减少对比度导致的刺眼感。</p>
+</li>
+<li><p><strong>组件和控件</strong> - 确保所有UI组件和控件在暗黑模式下都是可见的，并且它们的状态（如激活、禁用）在两种模式下都清晰。</p>
+</li>
+<li><p><strong>图片和媒体</strong> - 对于暗黑模式，应考虑使用较暗的图片和插图，或者为图片添加蒙版或过滤器，以适应暗背景。</p>
+</li>
+<li><p><strong>文本对比度</strong> - 文本应当足够对比，以确保在暗背景下的可读性。对于文本阴影和轮廓也应进行调整。</p>
+</li>
+</ol>
+<h3 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h3><ol>
+<li><p><strong>Asset Catalogs</strong> - 在Xcode的Asset Catalogs中，可以为每种颜色定义亮色和暗色两个版本。</p>
+</li>
+<li><p><strong>CSS支持</strong> - 在Web内容中，可以使用CSS的<code>prefers-color-scheme</code>查询来为网页添加暗黑模式支持。</p>
+</li>
+<li><p><strong>SwiftUI</strong> - 在SwiftUI中，可以通过<code>.environment(\.colorScheme, .dark)</code>为预览添加暗黑模式的支持。对于动态颜色，可以使用<code>Color</code>结构体内置的暗黑模式适配。</p>
+</li>
+<li><p><strong>UIKit</strong> - 在UIKit中，可以使用<code>traitCollection.userInterfaceStyle</code>来检查当前的界面风格，并在需要时调整UI元素的样式。</p>
+</li>
+</ol>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li><p><strong>测试</strong> - 在两种模式下都对应用进行全面的测试，确保UI元素的可见性和功能的可用性。</p>
+</li>
+<li><p><strong>用户设置</strong> - 提供设置选项，允许用户根据个人喜好切换模式。</p>
+</li>
+<li><p><strong>跟随系统</strong> - 默认情况下，应用应当跟随系统的暗黑模式设置，以保持用户体验的一致性。</p>
+</li>
+<li><p><strong>节能考量</strong> - 利用暗黑模式的节能优势，在OLED屏幕上通过使用更多真正的黑色来减少能耗。</p>
+</li>
+<li><p><strong>无障碍</strong> - 确保暗黑模</p>
+</li>
+</ol>
+<p>式下的色彩对比满足无障碍标准，以便色弱和视力障碍用户也能舒适使用。</p>
+<p>通过以上的设计和技术实现指南，开发者可以为其应用成功地集成暗黑模式，不仅提高了应用的美观性，同时也照顾到了用户的实际使用需求和舒适度。</p>
+<p><strong>第2小节：辅助功能的最佳实践</strong></p>
+<p>辅助功能（Accessibility）是确保所有用户，包括那些有视力、听力、运动或学习障碍的人，能够有效使用你的应用的关键组成部分。对于应用开发者来说，这不仅仅是一项法律义务或道德责任，更是一种设计上的优秀实践，它能够扩大应用的潜在用户群体，并提升用户体验。</p>
+<h3 id="认识辅助功能的范畴"><a href="#认识辅助功能的范畴" class="headerlink" title="认识辅助功能的范畴"></a>认识辅助功能的范畴</h3><ol>
+<li><p><strong>多感官接入</strong> - 保证信息的传递不仅限于一种感官，例如，对于视觉信息，提供文本描述或声音解释。</p>
+</li>
+<li><p><strong>易用性</strong> - 确保应用的操作简单明了，尤其是对于运动障碍用户，考虑到触摸目标的大小和屏幕的可达性。</p>
+</li>
+<li><p><strong>可见性</strong> - 包含字体大小的调整、高对比度模式以及颜色不是传达重要信息的唯一方式。</p>
+</li>
+<li><p><strong>认知考虑</strong> - 设计简洁、一致的界面，减少认知负担，特别是为了那些有认知障碍的用户。</p>
+</li>
+</ol>
+<h3 id="设计指南-1"><a href="#设计指南-1" class="headerlink" title="设计指南"></a>设计指南</h3><ol>
+<li><p><strong>文本可读性</strong> - 提供文本大小调整的功能，支持系统级别的“辅助功能”设置。</p>
+</li>
+<li><p><strong>高对比度</strong> - 提供高对比度主题或模式，辅以清晰的字体，帮助视觉障碍用户更好地识别内容。</p>
+</li>
+<li><p><strong>颜色盲友好</strong> - 设计UI时不要完全依赖颜色来区分元素或传达信息，使用图形符号或标签作为辅助。</p>
+</li>
+<li><p><strong>标签和说明</strong> - 所有的交互控件都应该有清晰的标签，辅以适当的声音或触觉反馈。</p>
+</li>
+<li><p><strong>语音控制</strong> - 支持通过语音命令进行控制，为那些无法使用传统输入设备的用户提供便利。</p>
+</li>
+</ol>
+<h3 id="技术实现-1"><a href="#技术实现-1" class="headerlink" title="技术实现"></a>技术实现</h3><ol>
+<li><p><strong>VoiceOver&#x2F;Speak Screen</strong> - 确保SwiftUI或UIKit组件正确实现了辅助功能标签和行为，以便VoiceOver能够读取屏幕上的内容。</p>
+</li>
+<li><p><strong>动态字体大小</strong> - 使用<code>UIFont.preferredFont(forTextStyle:)</code>和SwiftUI中的<code>.font(.system(size:))</code>来响应用户的字体大小设置。</p>
+</li>
+<li><p><strong>UIAccessibility协议</strong> - 通过实现相关的UIAccessibility协议来自定义非标准UI组件的辅助功能行为。</p>
+</li>
+<li><p><strong>辅助功能快捷方式</strong> - 通过设置快捷方式让用户能够快速访问常用的辅助功能。</p>
+</li>
+</ol>
+<h3 id="最佳实践-1"><a href="#最佳实践-1" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li><p><strong>持续测试</strong> - 在开发过程中，经常使用辅助功能进行测试，确保所有用户在使用应用时的体验一致。</p>
+</li>
+<li><p><strong>社群参与</strong> - 与残障社群合作，获取真实的反馈，并根据这些反馈改进产品。</p>
+</li>
+<li><p><strong>遵循标准</strong> - 遵循WCAG（Web Content Accessibility Guidelines）等国际标准来设计和开发应用。</p>
+</li>
+<li><p><strong>教育和文档</strong> - 提供有关如何使用应用中辅助功能的文档或视频教程。</p>
+</li>
+<li><p><strong>UI测试和自动化</strong> - 利用自动化测试框架来验证辅助功能的实现，确保在应用更新后功能依然可用。</p>
+</li>
+</ol>
+<p>通过实施这些最</p>
+<p>佳实践，开发者不仅能够提供一个包容性更强的应用体验，同时也能满足日益增长的多样化用户需求，构建起更加广泛的用户基础。</p>
+<p><strong>第3小节：动态字体与国际化</strong></p>
+<p>设计一个能够轻松适应不同语言和区域设置的用户界面，以及支持动态字体大小调整，是为了确保应用能够覆盖更广泛的用户群体，特别是那些有特定阅读需求的用户。</p>
+<h3 id="动态字体的重要性"><a href="#动态字体的重要性" class="headerlink" title="动态字体的重要性"></a>动态字体的重要性</h3><p>动态字体允许用户根据自己的视力需求来调整字体的大小。这对于那些需要辅助设备阅读的用户尤为重要。</p>
+<h3 id="实现动态字体"><a href="#实现动态字体" class="headerlink" title="实现动态字体"></a>实现动态字体</h3><ol>
+<li><p><strong>使用系统字体尺寸</strong> - 利用系统提供的字体大小，如在SwiftUI中使用<code>.font(.system(size:))</code>。</p>
+</li>
+<li><p><strong>响应用户设置</strong> - 应用应该能够响应并遵循用户的辅助功能设置，比如“更大字体”选项。</p>
+</li>
+<li><p><strong>字体可伸缩性</strong> - 保证应用的布局可以适应不同的字体大小而不会破坏界面设计。</p>
+</li>
+<li><p><strong>自定义字体的辅助功能</strong> - 如果使用自定义字体，确保它们能够与系统的辅助功能设置兼容，如使用<code>UIFontMetrics</code>来调整。</p>
+</li>
+</ol>
+<h3 id="国际化的挑战"><a href="#国际化的挑战" class="headerlink" title="国际化的挑战"></a>国际化的挑战</h3><p>国际化不仅仅是将文本翻译成不同的语言，还需要考虑到文化差异、布局方向（例如从右到左的语言）、日期和时间格式以及货币单位。</p>
+<h3 id="实现国际化"><a href="#实现国际化" class="headerlink" title="实现国际化"></a>实现国际化</h3><ol>
+<li><p><strong>本地化字符串</strong> - 使用本地化字符串文件（<code>.strings</code>）和键值对来管理应用中的文本。</p>
+</li>
+<li><p><strong>自适应布局</strong> - 确保UI能够适应不同的文本长度和布局方向。</p>
+</li>
+<li><p><strong>日期和数字格式</strong> - 使用<code>DateFormatter</code>和<code>NumberFormatter</code>来处理日期和数字的本地化格式。</p>
+</li>
+<li><p><strong>资源的国际化</strong> - 包括图像等资源的国际化，确保它们在不同文化中同样适用。</p>
+</li>
+</ol>
+<h3 id="最佳实践-2"><a href="#最佳实践-2" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li><p><strong>全面测试</strong> - 在不同的语言和辅助功能设置下测试应用，确保所有功能正常工作。</p>
+</li>
+<li><p><strong>持续的本地化和国际化</strong> - 让本地化和国际化成为开发流程的一部分，不断更新和完善。</p>
+</li>
+<li><p><strong>伪本地化测试</strong> - 使用伪本地化来测试应用的布局是否能够适应文字长度的变化。</p>
+</li>
+<li><p><strong>文化敏感性</strong> - 在设计和开发应用时，考虑到不同文化背景下的用户需求和习俗。</p>
+</li>
+<li><p><strong>动态字体和布局测试</strong> - 使用Xcode中的辅助功能检查器来预览应用在不同字体大小下的表现。</p>
+</li>
+</ol>
+<p>通过实施这些策略，开发者可以确保他们的应用不仅在不同地区和文化中使用无障碍，而且可以为所有用户提供一个更加个性化和易于使用的体验。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SwiftUI/" class="category-chain-item">SwiftUI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SwiftUI核心技术第12章Dark Mode和Accessibility</div>
+      <div>http://xuebusi.gitee.io/2023/11/08/SwiftUI核心技术第12章Dark-Mode和Accessibility/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>林克</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC13%E7%AB%A0%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="SwiftUI核心技术第13章性能优化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SwiftUI核心技术第13章性能优化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC11%E7%AB%A0%E9%80%82%E9%85%8D%E5%A4%9A%E5%B9%B3%E5%8F%B0/" title="SwiftUI核心技术第11章适配多平台">
+                        <span class="hidden-mobile">SwiftUI核心技术第11章适配多平台</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"UeEf1Og9eXqQmt4R5SD6T89a-gzGzoHsz","appKey":"nP5zBQgChvERhwq9Jyo7jFvp","path":"window.location.pathname","placeholder":"请友好评论～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

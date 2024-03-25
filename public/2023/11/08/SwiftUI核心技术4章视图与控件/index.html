@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="林克">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第二部分：构建用户界面 第4章：视图与控件 1. Text和Image 在SwiftUI中，用户界面是由各种视图组成的，其中最基本的两种视图是Text和Image。本节将详细探讨如何使用这两种视图来显示文本和图像。 Text Text视图用于在应用中显示一行或多行只读文本。它是最常见的视图之一，因为文本是用户交互的基本元素。 基础用法 创建一个Text视图非常简单，只需要传入一个字符串即可： 1T">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI核心技术4章视图与控件">
+<meta property="og:url" content="http://xuebusi.gitee.io/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF4%E7%AB%A0%E8%A7%86%E5%9B%BE%E4%B8%8E%E6%8E%A7%E4%BB%B6/index.html">
+<meta property="og:site_name" content="SwiftUI训练营">
+<meta property="og:description" content="第二部分：构建用户界面 第4章：视图与控件 1. Text和Image 在SwiftUI中，用户界面是由各种视图组成的，其中最基本的两种视图是Text和Image。本节将详细探讨如何使用这两种视图来显示文本和图像。 Text Text视图用于在应用中显示一行或多行只读文本。它是最常见的视图之一，因为文本是用户交互的基本元素。 基础用法 创建一个Text视图非常简单，只需要传入一个字符串即可： 1T">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-07T16:35:47.000Z">
+<meta property="article:modified_time" content="2024-03-17T06:11:08.769Z">
+<meta property="article:author" content="林克">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>SwiftUI核心技术4章视图与控件 - SwiftUI训练营</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xuebusi.gitee.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":30,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SwiftUI训练营" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SwiftUI训练营</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SwiftUI核心技术4章视图与控件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-08 00:35" pubdate>
+          2023年11月8日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SwiftUI核心技术4章视图与控件</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>第二部分：构建用户界面</strong></p>
+<p><strong>第4章：视图与控件</strong></p>
+<p><strong>1. Text和Image</strong></p>
+<p>在SwiftUI中，用户界面是由各种视图组成的，其中最基本的两种视图是<code>Text</code>和<code>Image</code>。本节将详细探讨如何使用这两种视图来显示文本和图像。</p>
+<p><strong>Text</strong></p>
+<p><code>Text</code>视图用于在应用中显示一行或多行只读文本。它是最常见的视图之一，因为文本是用户交互的基本元素。</p>
+<p><strong>基础用法</strong></p>
+<p>创建一个<code>Text</code>视图非常简单，只需要传入一个字符串即可：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Hello, SwiftUI!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>样式定制</strong></p>
+<p><code>Text</code>视图提供了多种修饰符来定制文本的显示方式：</p>
+<ul>
+<li><code>.font(_:)</code>：设置字体样式。</li>
+<li><code>.fontWeight(_:)</code>：设置字体的粗细。</li>
+<li><code>.foregroundColor(_:)</code>：设置文本颜色。</li>
+<li><code>.lineLimit(_:)</code>：设置最多显示行数。</li>
+<li><code>.multilineTextAlignment(_:)</code>：设置多行文本的对齐方式。</li>
+<li><code>.padding(_:)</code>：为文本周围添加填充。</li>
+</ul>
+<p>例如，要创建一个居中对齐、蓝色、加粗的文本，您可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Text</span>(<span class="hljs-string">&quot;Welcome to SwiftUI&quot;</span>)<br>    .font(.headline)<br>    .fontWeight(.bold)<br>    .foregroundColor(.blue)<br>    .multilineTextAlignment(.center)<br>    .padding()<br></code></pre></td></tr></table></figure>
+
+<p><strong>国际化和本地化</strong></p>
+<p>SwiftUI还支持文本的国际化和本地化。使用<code>LocalizedStringKey</code>初始化<code>Text</code>视图，可以确保文本根据用户的设备语言环境显示正确：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Text</span>(<span class="hljs-type">LocalizedStringKey</span>(<span class="hljs-string">&quot;hello_message&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><strong>Image</strong></p>
+<p><code>Image</code>视图用于在应用中显示图像。您可以从应用的资产目录、文件系统或网络加载图像。</p>
+<p><strong>从资产目录加载</strong></p>
+<p>最常用的加载图像方式是从Xcode项目的Assets.xcassets目录：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;myImage&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>图像修饰符</strong></p>
+<p><code>Image</code>视图也可以使用多种修饰符来调整显示的图像：</p>
+<ul>
+<li><code>.resizable()</code>：允许图像根据视图的大小进行拉伸或压缩。</li>
+<li><code>.aspectRatio(_:_:)</code>：设置图像的宽高比。</li>
+<li><code>.clipShape(_:)</code>：剪切图像到特定的形状。</li>
+<li><code>.shadow(_:)</code>：为图像添加阴影。</li>
+</ul>
+<p>例如，要创建一个圆形、有阴影的图像，您可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Image</span>(<span class="hljs-string">&quot;profile_pic&quot;</span>)<br>    .resizable()<br>    .aspectRatio(contentMode: .fill)<br>    .frame(width: <span class="hljs-number">100</span>, height: <span class="hljs-number">100</span>)<br>    .clipShape(<span class="hljs-type">Circle</span>())<br>    .shadow(radius: <span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>加载和显示网络图像</strong></p>
+<p>要显示来自网络的图像，您通常需要使用SwiftUI的<code>AsyncImage</code>视图或结合URLSession自定义一个加载器。由于本节重点是<code>Image</code>视图，我们将在后续章节详细探讨如何加载网络图像。</p>
+<p><strong>总结</strong></p>
+<p><code>Text</code>和<code>Image</code>是构建SwiftUI应用界面时最基础的元素。它们不仅用法简单，而且通过修饰符提供了强大的样式定制能力。通过合理使用这两种视图，您可以快速构建出丰富多彩且吸引人的界面。接下来的小节，我们将进一步探索SwiftUI中其他重要的视图和控件。</p>
+<p><strong>2. Buttons和Toggle</strong></p>
+<p>在SwiftUI中，<code>Button</code>和<code>Toggle</code>是两种用于用户交互的基本控件。它们使应用可以响应用户的操作，执行任务或更改状态。</p>
+<p><strong>Button</strong></p>
+<p>按钮是用户界面的基本组件，用于响应用户的点击或触摸操作。</p>
+<p><strong>创建按钮</strong></p>
+<p>在SwiftUI中，创建一个按钮需要提供一个动作和一个如何显示的内容：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Button</span>(action: &#123;<br>    <span class="hljs-comment">// 在这里执行按钮的动作</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;按钮被点击&quot;</span>)<br>&#125;) &#123;<br>    <span class="hljs-comment">// 提供按钮的内容</span><br>    <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;点击我&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>按钮样式</strong></p>
+<p>您可以使用修饰符来定制按钮的样式。例如，给按钮添加边框、背景色等：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Button</span>(<span class="hljs-string">&quot;点击我&quot;</span>) &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;按钮被点击&quot;</span>)<br>&#125;<br>.frame(width: <span class="hljs-number">200</span>, height: <span class="hljs-number">60</span>)<br>.background(<span class="hljs-type">Color</span>.blue)<br>.foregroundColor(.white)<br>.cornerRadius(<span class="hljs-number">10</span>)<br>.padding()<br></code></pre></td></tr></table></figure>
+
+<p>SwiftUI还提供了<code>buttonStyle(_:)</code>修饰符来应用预定义的按钮样式。</p>
+<p><strong>Toggle</strong></p>
+<p><code>Toggle</code>是一个开关控件，用于表示和改变一个布尔值的状态。</p>
+<p><strong>创建Toggle</strong></p>
+<p>创建一个<code>Toggle</code>同样需要一个绑定的状态和一个显示的标签：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isOn <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">Toggle</span>(isOn: <span class="hljs-variable">$isOn</span>) &#123;<br>        <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;切换状态&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在上面的代码中，<code>isOn</code>是一个<code>@State</code>属性，这意味着它是一个可变状态，当<code>Toggle</code>被切换时，视图会自动更新。</p>
+<p><strong>定制Toggle</strong></p>
+<p>可以使用<code>.toggleStyle(_:)</code>修饰符来定制<code>Toggle</code>的外观。SwiftUI提供了一些内建的样式，如<code>SwitchToggleStyle</code>和<code>CheckboxToggleStyle</code>（后者在macOS上可用）。</p>
+<p><strong>绑定和控制</strong></p>
+<p>按钮和开关的强大之处在于它们与SwiftUI的数据绑定系统的整合。当您使用<code>$</code>前缀创建绑定时，UI 控件将能够直接修改数据，反之亦然。这是SwiftUI声明式编程范式的核心。</p>
+<p><strong>响应用户输入</strong></p>
+<p>通常，按钮和开关会更改应用的状态或触发某个操作。例如，您可能会根据开关的状态显示或隐藏文本视图：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isAccepted <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">VStack</span> &#123;<br>        <span class="hljs-type">Toggle</span>(isOn: <span class="hljs-variable">$isAccepted</span>) &#123;<br>            <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;接受条款和条件&quot;</span>)<br>        &#125;<br><br>        <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;继续&quot;</span>) &#123;<br>            <span class="hljs-comment">// 可以在这里校验开关状态，例如是否接受了条款和条件</span><br>            proceedWithAction()<br>        &#125;<br>        .disabled(<span class="hljs-operator">!</span>isAccepted) <span class="hljs-comment">// 当不接受条款时禁用按钮</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<p>按钮和开关是任何交互式应用程序的基础，它们提供了一种简单有效的方式来收集用户输入并作出反应。SwiftUI的<code>Button</code>和<code>Toggle</code>视图配合数据绑定，使得创建动态和响应式的用户界面变得异常简单。它们的样式和行为可以通过一系列的修饰符进行定制，以适应您的设计需求。在接下来的小节中，我们将继续探讨如何使用SwiftUI构建更复杂的用户界面元素。</p>
+<p><strong>3. TextField和Slider</strong></p>
+<p>在SwiftUI中，创建交互式表单和控制元素是构建现代应用程序不可或缺的一部分。<code>TextField</code>和<code>Slider</code>是两种常用的控件，它们允许用户输入文本和选择值的范围。</p>
+<p><strong>TextField</strong></p>
+<p><code>TextField</code>是一个用于用户输入文本的控件，它可以接受键盘输入，并且可以对输入的文本进行格式化和校验。</p>
+<p><strong>创建TextField</strong></p>
+<p>创建一个<code>TextField</code>通常需要两个参数：一个标签和一个绑定到文本值的变量。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> username: <span class="hljs-type">String</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">TextField</span>(<span class="hljs-string">&quot;用户名&quot;</span>, text: <span class="hljs-variable">$username</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，每当用户在文本字段中输入时，<code>username</code>变量都会更新。<code>@State</code>属性包装器用于在本地视图状态中存储可变数据。</p>
+<p><strong>定制TextField</strong></p>
+<p>您可以使用修饰符来定制<code>TextField</code>的外观和行为，例如设置字体、颜色、对齐方式、键盘类型等。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">TextField</span>(<span class="hljs-string">&quot;用户名&quot;</span>, text: <span class="hljs-variable">$username</span>)<br>    .textFieldStyle(<span class="hljs-type">RoundedBorderTextFieldStyle</span>())<br>    .padding()<br>    .keyboardType(.default)<br>    .autocapitalization(.none)<br>    .disableAutocorrection(<span class="hljs-literal">true</span>)<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用了<code>textFieldStyle(_:)</code>来为文本字段设置圆角边框样式，并进行了一些其他的配置。</p>
+<p><strong>Slider</strong></p>
+<p><code>Slider</code>允许用户从一个范围内选择一个值。它可以用于设置音量、选择亮度或应用任何其他需要用户选择一个数值的场景。</p>
+<p><strong>创建Slider</strong></p>
+<p>创建<code>Slider</code>至少需要一个绑定到数值的变量和一个值的范围。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> sliderValue: <span class="hljs-type">Double</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.5</span><br><br><span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>    <span class="hljs-type">Slider</span>(value: <span class="hljs-variable">$sliderValue</span>, in: <span class="hljs-number">0</span><span class="hljs-operator">...</span><span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个<code>Slider</code>允许用户在0到1之间选择一个值。</p>
+<p><strong>定制Slider</strong></p>
+<p><code>Slider</code>同样可以使用修饰符进行外观和功能的定制。您可以设置步长，决定滑块在变化时是否持续触发更新，以及添加标签。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Slider</span>(<br>    value: <span class="hljs-variable">$sliderValue</span>,<br>    in: <span class="hljs-number">0</span><span class="hljs-operator">...</span><span class="hljs-number">1</span>,<br>    step: <span class="hljs-number">0.1</span>,<br>    onEditingChanged: &#123; editing <span class="hljs-keyword">in</span><br>        <span class="hljs-comment">// editing 是一个布尔值，表示是否正在编辑</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;当前滑块的值：<span class="hljs-subst">\(sliderValue)</span>&quot;</span>)<br>    &#125;<br>)<br>.accentColor(.green)<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，滑块的步长设置为0.1，且我们还指定了一个闭包，在用户编辑滑块值时触发。</p>
+<p><strong>总结</strong></p>
+<p><code>TextField</code>和<code>Slider</code>为SwiftUI应用提供了基本的用户输入功能。通过与<code>@State</code>或其他形式的状态管理相结合，它们为开发者提供了创建动态和响应式表单的能力。定制这些控件的外观和行为使它们能够匹配应用程序的设计语言，提供更好的用户体验。在接下来的章节中，我们将探索SwiftUI中的其他高级控件和视图，并学习如何将它们组合在一起以构建复杂和功能丰富的用户界面。</p>
+<p><strong>4. 自定义视图和控件</strong></p>
+<p>SwiftUI的真正魅力之一在于它为开发者提供了丰富的自定义视图和控件的能力。通过结合现有的视图和控件以及Swift语言的强大特性，我们可以创建完全定制的用户界面元素，以完美地适应我们的设计需求。</p>
+<p><strong>理解视图的组合</strong></p>
+<p>在SwiftUI中，最基本的自定义视图起始于现有的视图的组合。SwiftUI的视图是可组合的，意味着你可以将简单的视图组合成复杂的视图。比如，我们可以创建一个带有文本和图像的自定义按钮视图：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CustomButton</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-type">HStack</span> &#123;<br>            <span class="hljs-type">Image</span>(systemName: <span class="hljs-string">&quot;star.fill&quot;</span>)<br>                .resizable()<br>                .frame(width: <span class="hljs-number">20</span>, height: <span class="hljs-number">20</span>)<br>            <span class="hljs-type">Text</span>(<span class="hljs-string">&quot;收藏&quot;</span>)<br>        &#125;<br>        .padding()<br>        .background(<span class="hljs-type">Color</span>.blue)<br>        .foregroundColor(.white)<br>        .cornerRadius(<span class="hljs-number">10</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个<code>CustomButton</code>就是一个自定义视图，它可以在任何其他的SwiftUI视图中使用。</p>
+<p><strong>创建完全自定义的视图</strong></p>
+<p>如果需要更高级的自定义，你可以从<code>View</code>协议开始，实现自己的<code>body</code>属性。这允许你控制视图的渲染方式，并响应用户的输入。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CircularProgressView</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-keyword">var</span> progress: <span class="hljs-type">Double</span> <span class="hljs-comment">// 从0.0到1.0</span><br>    <br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-type">ZStack</span> &#123;<br>            <span class="hljs-type">Circle</span>()<br>                .stroke(lineWidth: <span class="hljs-number">20</span>)<br>                .opacity(<span class="hljs-number">0.3</span>)<br>                .foregroundColor(<span class="hljs-type">Color</span>.blue)<br>            <br>            <span class="hljs-type">Circle</span>()<br>                .trim(from: <span class="hljs-number">0.0</span>, to: <span class="hljs-type">CGFloat</span>(<span class="hljs-built_in">min</span>(<span class="hljs-keyword">self</span>.progress, <span class="hljs-number">1.0</span>)))<br>                .stroke(style: <span class="hljs-type">StrokeStyle</span>(lineWidth: <span class="hljs-number">20</span>, lineCap: .round, lineJoin: .round))<br>                .foregroundColor(<span class="hljs-type">Color</span>.blue)<br>                .rotationEffect(<span class="hljs-type">Angle</span>(degrees: <span class="hljs-number">270.0</span>))<br>                .animation(.linear)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们创建了一个显示进度的环形视图，它会根据<code>progress</code>属性显示不同的填充量。</p>
+<p><strong>响应用户交互</strong></p>
+<p>自定义视图可以通过各种手势识别器来响应用户的交互。例如，你可能会有一个自定义滑块控件，它通过拖动来改变值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CustomSlider</span>: <span class="hljs-title class_">View</span> &#123;<br>    <span class="hljs-meta">@Binding</span> <span class="hljs-keyword">var</span> value: <span class="hljs-type">Double</span> <span class="hljs-comment">// 绑定到外部状态</span><br>    <br>    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> &#123;<br>        <span class="hljs-type">GeometryReader</span> &#123; geometry <span class="hljs-keyword">in</span><br>            <span class="hljs-type">Rectangle</span>()<br>                .foregroundColor(.gray)<br>                .frame(height: <span class="hljs-number">20</span>)<br>                .gesture(<br>                    <span class="hljs-type">DragGesture</span>(minimumDistance: <span class="hljs-number">0</span>)<br>                        .onChanged &#123; gesture <span class="hljs-keyword">in</span><br>                            <span class="hljs-keyword">self</span>.value <span class="hljs-operator">=</span> <span class="hljs-type">Double</span>(gesture.location.x <span class="hljs-operator">/</span> geometry.size.width)<br>                        &#125;<br>                )<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用<code>GeometryReader</code>来获取视图的大小，并根据用户拖动的位置来更新<code>value</code>。</p>
+<p><strong>保持性能</strong></p>
+<p>在创建自定义视图和控件时，要记住保持它们的性能。这意味着：</p>
+<ul>
+<li>避免不必要的视图重绘和状态更新。</li>
+<li>合理使用<code>.animation()</code>和<code>.transition()</code>修饰符来为视图变化提供流畅的过渡效果。</li>
+<li>当视图层次变得复杂时，考虑使用<code>drawingGroup()</code>或<code>cache</code>等优化技术。</li>
+</ul>
+<p><strong>总结</strong></p>
+<p>SwiftUI提供了强大的工具集，可以帮助开发者创建精美且功能丰富的自定义视图和控件。通过结合视图的组合、自定义绘制、响应用户输入等技术，你可以创建出完全符合你的设计和功能需求的用户界面元素。记住，自定义视图和控件不仅仅是关于创造外观，更重要的是它们提供了</p>
+<p>与用户交互的新方式。随着你的SwiftUI技能的提高，你将能够更有效地利用这些工具，打造出既美观又高效的应用程序。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SwiftUI/" class="category-chain-item">SwiftUI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SwiftUI核心技术4章视图与控件</div>
+      <div>http://xuebusi.gitee.io/2023/11/08/SwiftUI核心技术4章视图与控件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>林克</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC5%E7%AB%A0%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86/" title="SwiftUI核心技术第5章布局管理">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SwiftUI核心技术第5章布局管理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/08/SwiftUI%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%AC3%E7%AB%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="SwiftUI核心技术第3章环境搭建">
+                        <span class="hidden-mobile">SwiftUI核心技术第3章环境搭建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"UeEf1Og9eXqQmt4R5SD6T89a-gzGzoHsz","appKey":"nP5zBQgChvERhwq9Jyo7jFvp","path":"window.location.pathname","placeholder":"请友好评论～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
